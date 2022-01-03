@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="Files">
+ 	<insert id="insert">
+ 		insert into files values(files_seq.nextval, #{oriName},#{sysName}, #{parentSeq})
+ 	</insert>
+ 	<select id="selectAll" resultType="kh.spring.dto.FilesDTO">
+ 		select * from files where parentseq=#{value}
+ 	</select>
+ </mapper>

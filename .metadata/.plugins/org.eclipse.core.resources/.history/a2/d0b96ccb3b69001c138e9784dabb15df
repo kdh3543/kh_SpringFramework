@@ -1,0 +1,92 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>WriteForm</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<!-- css -->
+    <link rel="stylesheet" type="text/css" href="/css/seededitor.min.css" />
+ 
+    <!-- script -->
+    <script type="text/javascript" src="/js/seededitor.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<style>
+#text {
+	width: 300px;
+}
+</style>
+
+</head>
+<body>
+	<form action="/board/writeProc">
+		<table border=1 align=center>
+			<tr>
+				<th colspan=2>글쓰기
+			</tr>
+			<tr>
+				<td align=center>제목
+				<td><input type=text placeholder="제목을 입력해주세요." id=text
+					name=title>
+			</tr>
+			<tr>
+				<td colspan=2><div id="editor"><textarea id=summernote cols=80 rows=30
+						name=contents></textarea></div>
+			</tr>
+			<tr>
+				<td colspan=2 align=right>
+					<button type=button id=back>목록으로</button> <button>작성완료</button> <input type=reset value="다시작성">
+			</tr>
+		</table>
+	</form>
+	
+	<script>
+		$("#back").on("click",function(){
+			history.back();
+		})
+		
+		
+		// 객체 생성
+    var editor = new SeedEditor();
+ 
+    // 객체 정의 함수
+    function defineEditor() {
+        editor.seArea = "editor";
+        editor.seWidth = "898";
+        editor.seHeight = "300";
+        editor.seBackColor = "#fafafa";
+        editor.seBorderColor = "#bdbdbd";
+        editor.seFontFamily = "dotumche";
+        editor.seFontSize = "10pt";
+        editor.seLineHeight = "1.5";
+        editor.seFontColor = "#000000";
+        editor.seFontBackColor = "#ffffff";
+        editor.seUploadUrl = "/File/UploadImage";
+        editor.seTableBoxRowCnt = 10;
+        editor.seTableBoxCellCnt = 10;
+    }
+ 
+    // 페이지 로드
+    $(document).ready(function (e) {
+        // 객체 정의 함수 호출
+        defineEditor();
+        // 에디터 생성
+        editor.makeEditor(editor);
+    });
+ 
+    // 코드보기 버튼 클릭 이벤트
+    $(document).on("click", "#btn_get_html", function (e) {
+        // Html 코드보기 함수 호출
+        alert(editor.getEditorHtml(editor));
+    });
+ 
+    // 코드삽입 버튼 클릭 이벤트
+    $(document).on("click", "#btn_set_html", function (e) {
+        var data = '<p style="margin:0px;padding:0px;line-height:1.5;text-align:left;"><table cellspacing="0" cellpadding="0" style="border-collapse: collapse;"><tbody style="font-family: dotumche; font-size: 10pt; color: rgb(0, 0, 0);"><tr><td rowspan="1" colspan="1" style="border: 1px solid rgb(0, 0, 0); width: 296px; height: 25px; background-color: rgb(156, 198, 239); vertical-align: middle;"><p style="margin: 0px; padding: 0px; text-align: center;">구분</p></td><td rowspan="1" colspan="1" style="border: 1px solid rgb(0, 0, 0); width: 296px; height: 25px; background-color: rgb(156, 198, 239); vertical-align: middle;"><p style="margin: 0px; padding: 0px; text-align: center;">설명</p></td><td rowspan="1" colspan="1" style="border: 1px solid rgb(0, 0, 0); width: 296px; height: 25px; background-color: rgb(156, 198, 239); vertical-align: middle;"><p style="margin: 0px; padding: 0px; text-align: center;">비고</p></td></tr><tr><td rowspan="1" colspan="1" style="border: 1px solid rgb(0, 0, 0); width: 296px; height: 25px; background-color: rgb(255, 255, 255); vertical-align: middle;"><p style="margin: 0px; padding: 0px; text-align: center;">1</p></td><td rowspan="1" colspan="1" style="border: 1px solid rgb(0, 0, 0); width: 296px; height: 25px; background-color: rgb(255, 255, 255); vertical-align: middle;"><p style="margin: 0px; padding: 0px; text-align: center;">2</p></td><td rowspan="1" colspan="1" style="border: 1px solid rgb(0, 0, 0); width: 296px; height: 25px; background-color: rgb(255, 255, 255); vertical-align: middle;"><p style="margin: 0px; padding: 0px; text-align: center;">3</p></td></tr></tbody></table></p>';
+        editor.setEditorHtml(editor, data);
+    });
+	</script>
+</body>
+</html>

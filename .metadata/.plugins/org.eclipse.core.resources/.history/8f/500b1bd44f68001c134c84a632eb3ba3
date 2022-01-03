@@ -1,0 +1,39 @@
+package kh.spring.dao;
+
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+import kh.spring.dto.MemberDTO;
+
+@Repository
+public class MemberDAO {
+	
+	@Autowired
+	private JdbcTemplate jdbc;
+	
+	public MemberDTO idDuplCheck(String id) throws Exception{
+		String sql = "select * from member where id = ?";
+		return jdbc.queryForObject(sql, new RowMapper<MemberDTO>() {
+			@Override
+			public MemberDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				String id = rs.getString("id");
+				String pw = rs.getString("pw");
+				String name = rs.getString("name");
+				String phone = rs.getString("phone");
+				String email = rs.getString("email");
+				String zipcode = rs.getString("zipcode");
+				String address1 = rs.getString("address1");
+				String address2 = rs.getString("address2");
+				Date signup_date = rs.getDate("signup_date");
+				MemberDTO dto = new MemberDTO(id,pw,name,phone,email,zipcode,address1,address2,signup_date);
+				return null;
+			}
+		},id);
+	}
+}

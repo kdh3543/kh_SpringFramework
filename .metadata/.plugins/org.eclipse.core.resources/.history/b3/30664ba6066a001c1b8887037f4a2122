@@ -1,0 +1,78 @@
+package kh.spring.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import kh.spring.dao.BoardDAO;
+import kh.spring.dto.BoardDTO;
+
+@Controller
+@RequestMapping("/board/")
+public class BoardController {
+	@Autowired
+	private HttpSession session;
+	
+	@Autowired
+	private BoardDAO dao;
+	
+	@RequestMapping("list")
+	public String list(Model model) throws Exception{
+		List<BoardDTO> list = dao.selectAll();
+		model.addAttribute("list",list);
+		return "board/boardView";
+	}
+	
+	@RequestMapping("writeForm")
+	public String writeForm() throws Exception{
+		return "board/writeForm";
+	}
+	
+	@RequestMapping("writeProc")
+	public String writeProc(BoardDTO dto) throws Exception{
+		dto.setWriter((String)session.getAttribute("loginID"));
+		dao.insert(dto);
+		return "redirect:list";
+	}
+	
+	@RequestMapping("detail")
+	public String detail(int seq, Model model) throws Exception{
+		BoardDTO dto = dao.selectBySeq(seq);
+		String id = (String)session.getAttribute("loginID");
+		model.addAttribute("loginID",id);
+		model.addAttribute("dto",dto);
+		return "board/detail";
+	}
+	
+	@RequestMapping("update")
+	public String update(BoardDTO dto) throws Exception{	
+		dao.update(dto);
+		return "redirect:list";
+	}
+	
+	@RequestMapping("delete")
+	public String delete(int seq) throws Exception{
+		dao.delete(seq);
+		return "redirect:list";
+	}
+	
+	@RequestMapping("searchByMulti")
+	public String searchByMulti(String name, String writer, Model model) throws Exception{
+		List<BoardDTO> list = dao.searchByMulti(name,writer);
+		model.addAttribute("list",list);
+		return "board/boardView";
+	}
+	
+	@ExceptionHandler(Exception.class)
+	public String exceptionHandler(Exception e) {
+		e.printStackTrace();
+		System.out.println("에러가 발생함");
+		return "error";
+	}
+}

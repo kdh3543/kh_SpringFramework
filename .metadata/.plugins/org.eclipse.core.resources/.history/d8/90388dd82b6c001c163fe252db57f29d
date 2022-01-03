@@ -1,0 +1,15 @@
+package kh.spring.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/board/")
+public class FileController {
+
+	@RequestMapping("upload")
+	public String upload() {
+		System.out.println("동작 확인");
+		return "home";
+	}
+}

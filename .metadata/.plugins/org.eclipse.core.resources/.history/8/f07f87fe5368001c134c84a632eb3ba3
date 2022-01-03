@@ -1,0 +1,38 @@
+package kh.spring.controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import kh.spring.dao.MemberDAO;
+
+@Controller
+@RequestMapping("/member/")
+public class MemberController {
+	
+	@Autowired
+	public MemberDAO dao;
+	
+	@RequestMapping("join")
+	public String memberJoin() {
+		return "member/join";
+	}
+	
+	@RequestMapping("idDuplCheck")
+	public String idDuplCheck(String id) throws Exception{
+		int result = dao.idCheck(id);
+		if(result>0) {
+			System.out.println("id 중복임");
+		}else {
+			System.out.println("id 중복 없음");
+		}
+		return "redirect:join";
+	}
+	
+	@ExceptionHandler(Exception.class)
+	public String exceptionHandler(Exception e) {
+		e.printStackTrace();
+		System.out.println("에러가 발생함");
+		return "error";
+	}
+}

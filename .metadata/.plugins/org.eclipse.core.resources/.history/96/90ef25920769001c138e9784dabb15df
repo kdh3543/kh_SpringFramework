@@ -1,0 +1,27 @@
+package kh.spring.controller;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/board/")
+public class BoardController {
+	@Autowired
+	private HttpSession session;
+	
+	@RequestMapping("toBoard")
+	public String toBoard() throws Exception{
+		return "board/boardView";
+	}
+	
+	@ExceptionHandler(Exception.class)
+	public String exceptionHandler(Exception e) {
+		e.printStackTrace();
+		System.out.println("에러가 발생함");
+		return "error";
+	}
+}

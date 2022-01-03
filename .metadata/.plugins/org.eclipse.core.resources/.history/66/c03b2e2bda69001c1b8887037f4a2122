@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!-- 구분짓기 위한 이름 -->
+  <mapper namespace="Contact">
+  	<insert id="insert">
+  		insert into contact values(contact_seq.nextval, #{name}, #{contact})
+  		<!-- #{name}-> dto.getName() -->
+  	</insert>
+  	<select id="selectCount" resultType="int">
+  		select count(*) from contact
+  	</select>
+  	
+  	<select id="selectAll" resultType="ContactDTO">
+  		select * from contact order by seq
+  	</select>	
+  </mapper>

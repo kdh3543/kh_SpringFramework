@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+  
+</head>
+<body>
+	<table border=1 align=center>
+		<tr>
+			<th colspan=2>글쓰기
+		</tr>
+		<tr>
+			<td align=center>제목 
+			<td><input type=text placeholder="제목을 입력해주세요.">
+		</tr>
+		<tr>
+			<td colspan=2><textarea cols=80 rows=30></textarea>
+		</tr>
+		<tr>
+			<td colspan=2 align=right>
+				<button>작성완료</button>
+				<input type=reset value="다시작성">
+		</tr>
+	</table>
+</body>
+</html>

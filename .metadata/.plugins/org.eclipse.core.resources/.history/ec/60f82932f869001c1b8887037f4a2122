@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapper namespace="Member">
+	<insert id="insert">
+		insert into member values(#{id},#{pw},#{name},#{phone},#{email},#{zipcode},#{address1},#{address2},sysdate)
+	</insert>
+	<delete id="delete">
+		delete from member where id = #{value}
+	</delete>
+	<select id="selectIdCheck" resultType="int">
+		select count(*) from member where id = #{value}
+	</select>
+	<select id="selectLogin" resultType="int">
+		select count(*) from member where id = #{id} and pw = #{pw}
+	</select>
+	<select id="selectAll" resultType="kh.spring.dto.MemberDTO">
+		select * from member order by seq;
+	</select>
+	<update id="update">
+		update member set name=?, phone=?, email=?, zipcode=?, address1=?, address2=? where id=?
+	</update>
+</mapper>

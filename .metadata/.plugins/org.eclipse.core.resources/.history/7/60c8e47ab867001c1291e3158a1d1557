@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Index</title>
+</head>
+<body>
+	<table border=1 align=center>
+		<tr>
+			<th>Login
+		</tr>
+		<tr>
+			<td><input type=text name=id placeholder="input your id">
+		</tr>
+		<tr>
+			<td><input type=password name=pw placeholder="input your pw">
+		</tr>
+		<tr>
+			<td align=center>
+			<button>로그인</button> 
+			<button type=button>회원가입</button>
+		</tr>
+	</table>
+</body>
+</html>

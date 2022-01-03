@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Index</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+<body>
+	<table border=1 align=center>
+		<tr>
+			<th>Login
+		</tr>
+		<tr>
+			<td><input type=text name=id placeholder="input your id">
+		</tr>
+		<tr>
+			<td><input type=password name=pw placeholder="input your pw">
+		</tr>
+		<tr>
+			<td align=center>
+			<button>로그인</button> 
+			<button type=button>회원가입</button>
+		</tr>
+	</table>
+</body>
+</html>

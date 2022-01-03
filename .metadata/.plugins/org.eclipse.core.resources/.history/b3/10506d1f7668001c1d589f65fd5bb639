@@ -1,0 +1,60 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+<link rel="style" href="/css/style.css">
+<body>
+	<c:choose>
+		<c:when test="${loginID !=null }">
+			<form action="/member/resign">
+				<table border=1 align=center>
+					<tr>
+						<th align=center colspan=4>${loginID }님환영합니다.
+					</tr>
+					<tr>
+						<td><button>게시판</button>
+						<td><button>마이페이지</button>
+						<td><a href="/member/logout"><button type=button>로그아웃</button></a>
+						<td><button>회원탈퇴</button>
+					</tr>
+				</table>
+			</form>
+		</c:when>
+		<c:otherwise>
+			<form action="/member/login" method="post">
+				<table border=1 align=center>
+					<tr>
+						<th>Login
+					</tr>
+					<tr>
+						<td><img src="/imgs/이미지3.gif">
+					</tr>
+					<tr>
+						<td align=center><input type=text name=id
+							placeholder="input your id"> <input type=password name=pw
+							placeholder="input your pw">
+					</tr>
+					<tr>
+						<td align=center>
+							<button>로그인</button>
+							<button type=button id=join>회원가입</button>
+					</tr>
+				</table>
+			</form>
+		</c:otherwise>
+	</c:choose>
+
+
+	<script>
+		$("#join").on("click", function() {
+			location.href = "/member/join";
+		})
+	</script>
+</body>
+</html>

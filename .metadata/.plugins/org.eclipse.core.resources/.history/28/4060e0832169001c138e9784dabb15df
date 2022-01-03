@@ -1,0 +1,66 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<style>
+#text {
+	width: 300px;
+}
+</style>
+
+</head>
+<body>
+	<form action="/board/update" id=frm>
+		<table border=1 align=center>
+			<tr>
+				<th colspan=2>글쓰기
+			</tr>
+			<tr>
+				<td align=center>제목
+				<td><input type=text placeholder="제목을 입력해주세요." id=text
+					name=title value="${dto.title }">
+			</tr>
+			<tr>
+				<td colspan=2><textarea cols=80 rows=30 name=contents>${dto.contents }</textarea>
+			</tr>
+			<tr>
+				<td colspan=2 align=right>
+				<c:if test="${dto.writer == loginID }">
+					<button type=button id=mod>수정하기</button>
+					<button type=button id=del>삭제하기</button>
+					<button type=button id=modOk style="display:none">수정완료</button>
+					<button type=button id=modCancel style="display:none">취소</button>
+				</c:if>
+			</tr>
+		</table>
+	</form>
+	<script>
+		$("#back").on("click",function(){
+			location.href="/board/list";
+		})
+		$("#mod").on("click",function(){
+			
+			bkTitle = $("#title").val();
+			bkContents = $("#contents").val();
+			
+			$("#title").removeAttr("readonly");
+			$("#contents").removeAttr("readonly");
+			$("#modOk").css("display","inline");
+			$("#modCancel").css("display","inline");
+			$("#mod").css("display","none");
+			$("#del").css("display","none");
+			
+		})
+		$("#modOk").on("click",function(){
+			if(confirm("이대로 수정하시겠습니까?")){
+				$("#frm").submit();
+			}
+		})
+	</script>
+</body>
+</html>

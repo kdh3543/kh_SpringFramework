@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Free Board</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+</head>
+<body>
+	<table border=1 align=center>
+		<tr>
+			<th colspan=5>board Main
+		</tr>
+		<tr>
+			<td>No.
+			<td>Title
+			<td>Writer
+			<td>Write_date
+			<td>view_count
+		</tr>
+	</table>
+</body>
+</html>

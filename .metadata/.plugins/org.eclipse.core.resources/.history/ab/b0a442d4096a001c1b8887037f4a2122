@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="Board">
+ 	<insert id="insert">
+ 		insert into board values(board_seq.nextval,#{writer},#{title},#{contents},sysdate,default)
+ 	</insert>
+ 	
+ 	<select id="selectAll" resultType="kh.spring.dto.BoardDTO">
+ 		select * from board
+ 	</select>
+ 	<select id="selectBySeq" resultType="kh.spring.dto.BoardDTO">
+ 		select * from board where seq = #{value}	
+ 	</select>
+ 	<select id="searchByMulti" resultType="kh.spring.dto.BoardDTO">
+ 		select * from board
+ 		<trim prefix="where" prefixOverrides="and|or">
+ 			<if test="title!=''">
+ 				title = #{title}
+ 			</if>
+ 			<if test="writer!=''">
+ 				and writer = #{writer}
+ 			</if>
+ 		</trim>
+ 	</select>
+ 	<update id="update">
+ 		update board set title=#{title}, contents=#{contents} where seq=#{seq}
+ 	</update>
+ 	<delete id="delete">
+ 		delete from board where seq = #{value}
+ 	</delete>
+ </mapper>
+  
+  

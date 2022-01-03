@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+img{
+	width:100px;
+	height:100px;
+}
+img:hover{
+	cursor:pointer;
+}

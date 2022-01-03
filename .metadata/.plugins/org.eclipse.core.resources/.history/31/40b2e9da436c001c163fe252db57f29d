@@ -1,0 +1,22 @@
+package kh.spring.dao;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class FilesDAO {
+
+	@Autowired
+	private SqlSessionTemplate mybatis;
+	
+	public int insert(String sysName, String oriName) {
+		Map<String, String> map = new HashMap<>();
+		map.put("sysName", sysName);
+		map.put("oriName", oriName);
+		return mybatis.insert("File.insert",map);
+	}
+}
